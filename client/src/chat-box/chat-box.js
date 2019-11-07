@@ -1,4 +1,4 @@
-var mainUrl = 'http://localhost:3000';
+var mainUrl = 'http://192.168.2.217:3000';
 
 function ChatBox() {
 	if (!(this instanceof ChatBox)){
@@ -13,19 +13,22 @@ function ChatBox() {
 	}
 
 	this.createSocket = function() {
+		var self = this;
+
 		var socket = io(mainUrl);
 		socket.on('connect', function(){
-			socket.emit('room', this.options.appKey);
+			socket.emit('room', self.options.appKey);
 		});
 
 		socket.on('ospeech', function(data){
-			this.messageReceived(data);
+			self.messageReceived(data);
 		});
 
 		return socket;
 	}
 
 	this.messageReceived = function(data) {
+		console.log("message received : ", data);
 		var messageElement = document.createElement('div');
 		messageElement.innerHTML =
 		`<div class="message-container">
@@ -37,7 +40,9 @@ function ChatBox() {
 		</div>`;
 
 		if (this.options.username === data.username) {
-			messageElement.className += 'float-right';
+			messageElement.className += 'right';
+		} else {
+			messageElement.className += 'left';
 		}
 		
 		var allMessages = document.querySelector("#messages");
@@ -46,9 +51,6 @@ function ChatBox() {
 
 	this.sendMessage = function(message) {
 		this.socket.emit('ospeech', {username: this.options.username, message});
-
-		// TODO : this is for testing. Remove it in future
-		this.messageReceived({username : "tolga", message});
 	}
 
 	this.addChatBoxListeners = function() {
@@ -141,6 +143,9 @@ function ChatBox() {
 	}
 
 	this.formatDate = function(date) {
-		return moment(date).format('hh:mm');
+		var isToday = moment(date).isSame(moment(), 'day');
+		if (isToday) {
+			return moment(date).format('HH:mm');
+		}
 	}
 }

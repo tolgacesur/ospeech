@@ -1,0 +1,19 @@
+{
+  "name": "ospeach",
+  "version": "1.0.0",
+  "description": "Open pup-op speach chat aplication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "speach"
+  ],
+  "author": "mbilalbark-tolgacesur",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongose": "0.0.2-security",
+    "socket.io": "^2.3.0"
+  }
+}

@@ -1,28 +1,26 @@
 
-var express = require('express');
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-// const whitelist = ['http://localhost:3000', 'http://example2.com'];
-// const corsOptions = {
-//   credentials: true, // This is important.
-//   origin: (origin, callback) => {
-//     if(whitelist.includes(origin))
-//       return callback(null, true)
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const config = require('./config.js');
+// DB connection
+mongoose.connect(config.dburi, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true }, err => console.log(err ? err : 'Mongo connected.'))
+app.use(express.json());
+// Routers
+const user = require('./src/routers/Users');
 
-//       callback(new Error('Not allowed by CORS'));
-//   }
-// }
-
-// app.use();
-// mongoose.connect("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb");
-var user = require('./src/routers/Users');
-const port = 3000;
-
+// End-Points
 app.use('/user',user)
+
+
+/**
+ * Socket 
+ * Two subscribe socket channel 'room' and ospeach
+ */
 let roomId;
 io.on('connection', function(socket){
-    console.log("kim ",socket.id)
     socket.on('room', function(room) {
         socket.join(room);
         roomId = room;
@@ -35,4 +33,4 @@ io.on('connection', function(socket){
 });
 
 
-http.listen(port, () => console.log(`Example app listening on port ${port}!`))
+http.listen(config.port, () => console.log(`Example app listening on port ${config.port}!`))

@@ -3,8 +3,7 @@ const router = express.Router()
 const {Room} = require("../models/RoomsModel");
 const {User} = require("../models/UsersModel")
 
-router.use(function timeLog (req, res, next) {
-    console.log('Time: ', Date.now())
+router.use((req, res, next) => {
     next()
 })
 // Room create 

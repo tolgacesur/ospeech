@@ -13,25 +13,26 @@ app.use(express.json())
 const user = require('./src/routers/UsersController')
 const room = require('./src/routers/RoomController')
 const feedbacks = require('./src/routers/FeedBacksController')
-
+const message = require('./src/routers/MessageController')
+const msgsave = require('./src/routers/MessageSave')
 app.use('/user',user)
 app.use('/room',auth.verifyUser, room)
-app.use('feedbacks',feedbacks)
+app.use('/feedbacks',feedbacks)
+app.use('/message', auth.verifyUser, message )
 /**
  * Socket 
  * Two subscribe socket channel 'room' and ospeach
  */
-let roomId;
 io.on('connection', function(socket){
     socket.on('room', function(room) {
         socket.join(room)
-        roomId = room
     });
-    socket.on('ospeech', function(msg){     
-        console.log(msg)
-        io.sockets.in(roomId).emit('ospeech', msg)
+    socket.on('ospeech', function(msg){
+        if(msg.message !==""){
+            io.sockets.in(msg.roomId).emit('ospeech', msg)
+            msgsave.addMessage(msg)
+        }
     });
 });
-
 
 http.listen(config.port, () => console.log(`Example app listening on port ${config.port}!`))

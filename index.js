@@ -1,19 +1,20 @@
 
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const config = require('./config.js');
+const express = require('express')
+const mongoose = require('mongoose')
+const app = express()
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+const config = require('./config.js')
+const auth = require("./src/middleware/auth")
 // DB connection
 mongoose.connect(config.dburi, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true }, err => console.log(err ? err : 'Mongo connected.'))
-app.use(express.json());
+app.use(express.json())
 // Routers
-const user = require('./src/routers/Users');
-
-// End-Points
+const user = require('./src/routers/UsersController')
+const room = require('./src/routers/RoomController')
+// Routers
 app.use('/user',user)
-
+app.use('/room',auth.verifyUser, room)
 
 /**
  * Socket 
@@ -22,13 +23,12 @@ app.use('/user',user)
 let roomId;
 io.on('connection', function(socket){
     socket.on('room', function(room) {
-        socket.join(room);
-        roomId = room;
+        socket.join(room)
+        roomId = room
     });
-    socket.on('ospeech', function(msg){
-        
-        console.log(msg);
-        io.sockets.in(roomId).emit('ospeech', msg);
+    socket.on('ospeech', function(msg){     
+        console.log(msg)
+        io.sockets.in(roomId).emit('ospeech', msg)
     });
 });
 

@@ -1,10 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const router = express.Router()
 const { User,validate } = require("../models/UsersModel");
-const auth = require('../middleware/auth')
-const config = require('../../config')
 
 router.use(function timeLog (req, res, next) {
     console.log('Time: ', Date.now())

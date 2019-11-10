@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const {Room, validate} = require("../models/RoomsModel");
+const {Room} = require("../models/RoomsModel");
 const {User} = require("../models/UsersModel")
-const auth = require('../middleware/auth')
 
 router.use(function timeLog (req, res, next) {
     console.log('Time: ', Date.now())

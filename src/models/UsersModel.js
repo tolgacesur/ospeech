@@ -14,8 +14,6 @@ const UserSchema = new mongoose.Schema({
     return token;
   }
 
-const User = mongoose.model('User', UserSchema)
-
 function validateUser(user) {
     const schema = {
         username : Joi.string().required(),
@@ -24,6 +22,6 @@ function validateUser(user) {
     }
     return Joi.validate(user,schema)
 }
-exports.User = User;
+exports.User =  mongoose.model('User', UserSchema)
 exports.validate = validateUser; 
 

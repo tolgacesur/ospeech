@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
             return newuser.save( (err,user) => {
               if(err)
                 return res.status(500).send({"error":err})
-    
+  
               let body = {
                 username : user.username,
                 email: user.email

@@ -1,6 +1,7 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
@@ -18,18 +19,23 @@ const msgsave = require('./src/routers/MessageSave')
 app.use('/user',user)
 app.use('/room',auth.verifyUser, room)
 app.use('/feedbacks',feedbacks)
-app.use('/message', auth.verifyUser, message )
+app.use('/message', auth.verifyUser, message)
+
+app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')))
+app.use('/client', express.static(path.join(__dirname, 'public/client')));
+app.use('/', express.static(path.join(__dirname, 'public/landing')))
+
 /**
  * Socket 
  * Two subscribe socket channel 'room' and ospeach
  */
 io.on('connection', function(socket){
-    socket.on('room', function(room) {
+    socket.on('join-room', function(room) {
         socket.join(room)
     });
-    socket.on('ospeech', function(msg){
+    socket.on('send-message', function(msg){
         if(msg.message !==""){
-            io.sockets.in(msg.roomId).emit('ospeech', msg)
+            io.sockets.in(msg.roomId).emit('message-received', msg)
             msgsave.addMessage(msg)
         }
     });

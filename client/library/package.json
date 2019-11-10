@@ -1,0 +1,17 @@
+{
+  "name": "ospeech-js-client",
+  "version": "1.0.0",
+  "description": "Ospeech Web Client",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --watch --mode=development",
+    "build": "webpack --mode=production",
+    "postbuild": "cp -R ./dist/. ../../public/client/library/ && cp -R ./assets/. ../../public/client/library/assets"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

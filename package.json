@@ -1,13 +1,14 @@
 {
-  "name": "ospeach",
+  "name": "ospeech",
   "version": "1.0.0",
-  "description": "Open pup-op speach chat aplication",
+  "description": "Open pop-up speech chat aplication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "start" : "node index.js"
   },
   "keywords": [
-    "speach"
+    "speech"
   ],
   "author": "mbilalbark-tolgacesur",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.9",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }

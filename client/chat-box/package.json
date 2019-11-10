@@ -1,0 +1,22 @@
+{
+  "name": "chat-box",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "webpack --watch --mode=development",
+    "build": "webpack --mode=production",
+    "postbuild": "cp -R ./dist/. ../../public/client/chat-box/ && cp -R ./assets/. ../../public/client/chat-box/assets"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "css-loader": "^3.2.0"
+  }
+}

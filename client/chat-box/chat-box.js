@@ -234,7 +234,7 @@ function ChatBox() {
 			value = value === 'null' ? null : value;
 			value = value === 'undefined' ? undefined : value;
 
-			data[params[x].split('=')[0]] = value;
+			data[params[x].split('=')[0]] = decodeURIComponent(value);
 		}
 
 		return data;

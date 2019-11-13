@@ -13,28 +13,30 @@
 	<script type="text/javascript" src="./assets/js/moment.min.js"></script>
 	<script type="text/javascript" src="./assets/js/socket.io.slim.js"></script>
 
-<link href="main.css" rel="stylesheet"></head>
+	<link href="chat-box.css" rel="stylesheet"><link href="chat-box.css" rel="stylesheet"></head>
+
+</head>
 <body>
 	<div class="d-flex flex-column" style="height: 100%">
 		<div class="d-flex align-items-center flex-shrink-0 p-2">
 			<div class="flex-grow-1 text-white p-2">OSpeech</div>
 			<button class="btn btn-sm btn-light mr-3" id="user-popover" title="Change Username" data-toggle="popover" popover-content="#user-popover-template">
-					<img width="20" height="20" class="mt-1" src="../chat-box/assets/svg/group.svg" alt="User">
+					<img width="20" height="20" class="mt-1" src="./assets/svg/group.svg" alt="User">
 			</button>
 			<button class="btn btn-sm btn-light" id="feedback-popover" title="Give a feedback" data-toggle="popover" popover-content="#feedback-popover-template">
-					<img width="20" height="20" class="mt-1" src="../chat-box/assets/svg/feedback.svg" alt="Feedback">
+					<img width="20" height="20" class="mt-1" src="./assets/svg/feedback.svg" alt="Feedback">
 			</button>
 		</div>
 		<div class="flex-grow-1 overflow-auto ml-3 mx-2 p-2 bg-light" id="messages">
 			<div class="text-center" id="no-message" >
 				<p class="text-muted mb-0">Welcome to OSpeech</p>
 				<p class="text-muted">Message history is empty</p>
-				<img id="group-chat-icon" width="100" height="100" src="../chat-box/assets/svg/group-chat.svg">
+				<img id="group-chat-icon" width="100" height="100" src="./assets/svg/group-chat.svg">
 			</div>
 		</div>
 		<div id="name-container" class="ml-3 mr-2 mt-1">
 			<small class="text-white">To join chatroom please enter username</small>
-			<img class="ml-1" width="15" height="15" src="../chat-box/assets/svg/startup.svg">
+			<img class="ml-1" width="15" height="15" src="./assets/svg/startup.svg">
 			<div class="d-flex mb-2 mt-1">
 				<input class="form-control form-control-sm" placeholder="Enter your username" type="text" id="name-input">
 				<button class="btn btn-sm btn-dark ml-2" id="save-name-button">Save</button>

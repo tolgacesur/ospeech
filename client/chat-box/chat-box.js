@@ -1,8 +1,6 @@
-var mainUrl = 'http://127.0.0.1:3000';
+var mainUrl = 'http://127.0.0.1:3000'; // TODO : Get this url as environment
 var chatBox = ChatBox();
 	chatBox.init();
-
-// TODO : Fix autogrow
 
 function ChatBox() {
 	if (!(this instanceof ChatBox)){
@@ -23,18 +21,15 @@ function ChatBox() {
 
 	this.createSocket = function() {
 		var socket = io(mainUrl, {
-			reconnectionDelay: 500
+			reconnectionDelay: 250,
+			reconnectionAttempts: 3
 		});
 
 		socket.on('connect', this.joinRoom.bind(this));
 		socket.on('message-received', this.messageReceived.bind(this));
-		socket.on('connect_error', function(){
+		socket.on('reconnect_failed', function(){
 			console.log("error occured");
-			// Implement this
-		});
-		socket.on('connect_timeout', function(){
-			console.log("timeout");
-			// TODO : show error
+			//TODO : Implement this
 		});
 
 		return socket;
@@ -95,7 +90,9 @@ function ChatBox() {
 		}
 
 		messageInputElement.addEventListener("keyup", function(event) {
+			// Reset input size
 			if (!messageInputElement.value.length){
+				messageInputElement.style.height = 0;
 				return;
 			}
 
@@ -151,12 +148,33 @@ function ChatBox() {
 			var feedbackMessageInput = document.querySelector('.popover-body #feedback-message-input');
 			sendFeedBackButton.onclick = function() {
 				var email = feedbackEmailInput.value;
-				console.log("Feedback", {username: self.options.username, email, room: self.options.appKey});
-				feedbackEmailInput.value = '';
-				feedbackMessageInput = '';
+				var message = feedbackMessageInput.value;
 
-				// TODO: Add Http request here and close popover. Maybe we can add a thanks message
+				if (!message){
+					return;
+				}
+
+				$.ajax(mainUrl + '/feedbacks/send', {
+					data : JSON.stringify({
+						email,
+						message,
+						room: self.options.appKey
+					}),
+					type : 'POST',
+					contentType : 'application/json',
+				}).done(function(){
+					feedbackEmailInput.value = '';
+					feedbackMessageInput.value = '';
+				});
 			}
+
+			// Reset input size
+			feedbackMessageInput.addEventListener('keyup', function(){
+				if (!feedbackMessageInput.value.length){
+					feedbackMessageInput.style.height = 0;
+					return;
+				}
+			});
 
 			// Auto grow
 			feedbackMessageInput.addEventListener('input', function() {
@@ -175,8 +193,6 @@ function ChatBox() {
 				var newUsername = userNameInput.value;
 				self.options.username = newUsername;
 				localStorage.setItem('ospeech-username', self.options.username);
-
-				// TODO: Close popover and sperate this function and use above too.
 			}
 		});
 	}
@@ -234,7 +250,8 @@ function ChatBox() {
 	}
 }
 
-require('./chat-box.css')
+// Helpers
+require('./chat-box.css');
 
 $(document).ready(function(){
 	$('[data-toggle="popover"]').popover({
@@ -247,5 +264,14 @@ $(document).ready(function(){
 			var content = $(this).attr("popover-content");
 			return $(content).html();
 		}
+	});
+
+	$('body').on('click', function (e) {
+		$('[data-toggle=popover]').each(function () {
+			// hide any open popovers when the anywhere else in the body is clicked
+			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+				$(this).popover('hide');
+			}
+		});
 	});
 })

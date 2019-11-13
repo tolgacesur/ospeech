@@ -6,7 +6,7 @@ router.use( (req, res, next)  => {
     next()
 })
 
-router.post("/create", (req,res) => {
+router.post("/send", (req,res) => {
     let newFeedBack = new FeedBacks(req.body)
     return newFeedBack.save((err,feedBack) => {
         if(err) 

@@ -7,9 +7,13 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const config = require('./config.js')
 const auth = require('./src/middleware/auth')
+const cors = require('cors')
+
 // DB connection
 mongoose.connect(config.dburi, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true }, err => console.log(err ? err : 'Mongo connected.'))
 app.use(express.json())
+app.use(cors())
+
 // Routers
 const user = require('./src/routers/UsersController')
 const room = require('./src/routers/RoomController')
@@ -21,6 +25,7 @@ app.use('/room',auth.verifyUser, room)
 app.use('/feedbacks',feedbacks)
 app.use('/message', auth.verifyUser, message)
 
+// Public Files
 app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')))
 app.use('/client', express.static(path.join(__dirname, 'public/client')));
 app.use('/', express.static(path.join(__dirname, 'public/landing')))

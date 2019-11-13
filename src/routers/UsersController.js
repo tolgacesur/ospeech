@@ -17,7 +17,7 @@ router.post("/register", (req, res) => {
       } 
       if (user)
       {
-          return res.status(401).send({"Message":"User has registered!"})
+          return res.status(422).send({message: "User has registered!"})
       }
       else
       {
@@ -34,9 +34,10 @@ router.post("/register", (req, res) => {
   
               let body = {
                 username : user.username,
-                email: user.email
+                email: user.email,
+                token: token
               }
-              return res.header("x-auth-token", token).send(body);
+              return res.send(body);
             })
           }
         })
@@ -57,18 +58,18 @@ router.post("/login", (req, res) => {
                 let token = user.generateAuthToken();
                 let body = {
                   username : user.username,
-                  email: user.email
+                  email: user.email,
+                  token: token
                 }
-                  res.setHeader("x-auth-token", token);
                   return res.status(200).send(body);
               }
               else {
-                return res.status(401).send({"Message":"The email address or password is incorrect. Please retry..."})
+                return res.status(422).send({message: "The email address or password is incorrect. Please retry..."})
               }
             })
           }
         else
-          return res.status(401).send({"Message":"The email address or password is incorrect. Please retry..."});
+          return res.status(422).send({message: "The email address or password is incorrect. Please retry..."});
       })
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import ApiService from '../../service/api';
 
@@ -51,11 +51,10 @@ class Register extends React.Component {
 				redirectReferrer: true
 			});
 		}).catch(err => {
-			err = err.response.data;
 			// TODO : We can use error codes
 			this.setState({
 				errors : {
-					message : err.message || 'Oops Something Went Wrong!'
+					message : err.message
 				}
 			});
 		});
@@ -136,6 +135,13 @@ class Register extends React.Component {
 										<button type="button" onClick={this.register} className="btn btn-primary mt-4">Create account</button>
 									</div>
 								</form>
+							</div>
+						</div>
+						<div className="row mt-3">
+							<div className="col-6">
+								<Link className="text-light" to="/login">
+									<small>Already have an account?</small>
+								</Link>
 							</div>
 						</div>
 					</div>

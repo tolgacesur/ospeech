@@ -55,7 +55,7 @@ class Sidemenu extends React.Component {
 						</div>
 						<ul className="navbar-nav">
 							<li className="nav-item">
-								<NavLink exact className="nav-link" activeClassName="active" to="/">
+								<NavLink exact className="nav-link" activeClassName="active" to="/dashboard">
 									<i className="ni ni-tv-2 text-primary"></i> Dashboard
 								</NavLink>
 							</li>

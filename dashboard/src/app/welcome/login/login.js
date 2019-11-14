@@ -46,11 +46,10 @@ class Login extends React.Component {
 				redirectReferrer: true
 			});
 		}).catch(err => {
-			err = err.response.data;
 			// TODO : We can use error codes
 			this.setState({
 				errors : {
-					message : err.message || 'Oops Something Went Wrong!'
+					message : err.message
 				}
 			});
 		});

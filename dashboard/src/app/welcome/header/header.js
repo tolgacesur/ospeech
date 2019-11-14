@@ -5,11 +5,13 @@ class Header extends React.Component {
 		return (
 			<div className="header bg-gradient-primary py-7 py-lg-8">
 				<div className="container">
-					<div className="header-body text-center mb-7">
+					<div className="header-body text-center mb-5 mt-5">
 						<div className="row justify-content-center">
 							<div className="col-lg-5 col-md-6">
 								<h1 className="text-white">Welcome!</h1>
-								<p className="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+								<p className="text-lead text-light">
+									Sign up or Login to easily add chatbox to the your website.
+								</p>
 							</div>
 						</div>
 					</div>

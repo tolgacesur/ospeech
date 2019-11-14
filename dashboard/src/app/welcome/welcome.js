@@ -13,7 +13,7 @@ class Welcome extends React.Component {
 		super(props)
 	}
 
-	componentWillMount(){
+	UNSAFE_componentWillMount(){
 		window.document.body.style.backgroundColor = '#172b4d';
 	}
 

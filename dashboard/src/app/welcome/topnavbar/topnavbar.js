@@ -32,7 +32,7 @@ class Topnavbar extends React.Component {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link to="/login" className="nav-link nav-link-icon" href="#">
+							<Link to="/login" className="nav-link nav-link-icon">
 								<i className="ni ni-key-25"></i>
 								<span className="nav-link-inner--text">Login</span>
 							</Link>

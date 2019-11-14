@@ -11,8 +11,12 @@ import './dashboard.scss';
 
 class Dashboard extends React.Component {
 
-	componentWillMount(){
+	UNSAFE_componentWillMount(){
 		window.document.body.style.backgroundColor = '#f8f9fe';
+	}
+
+	componentDidMount(){
+		// TODO : Get initialAppData and update Cache here
 	}
 
 	render() {

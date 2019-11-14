@@ -2,6 +2,7 @@ import React from 'react';
 import Highlight from 'react-highlight.js'
 
 import './main.scss';
+import ApiService from '../../service/api';
 
 class Main extends React.Component {
 	constructor(props) {
@@ -18,6 +19,12 @@ class Main extends React.Component {
 				</script>
 			`
 		}
+	}
+
+	componentDidMount(){
+		ApiService.getRooms().then(room => {
+			console.log(room);
+		});
 	}
 
 	render() {

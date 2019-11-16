@@ -67,15 +67,15 @@
 		        <div class="navbar-header">
 		        	<!-- Mobile Toggle Menu Button -->
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		          	<a class="navbar-brand" href="index.html">OSpeech<span>.</span></a> 
+		          	<a class="navbar-brand" href="/">OSpeech<span>.</span></a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
 		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
 		            <li><a href="#" data-nav-section="services"><span>Services</span></a></li>
 					<li><a href="#" data-nav-section="features"><span>Features</span></a></li>
-					<li><a href="#" data-nav-section="features"><span>Sing Up</span></a></li>
-					<li><a href="#" data-nav-section="features"><span>Login</span></a></li>
+					<li><a href="/register"><span>Sing Up</span></a></li>
+					<li><a href="/login"><span>Login</span></a></li>
 		          </ul>
 		        </div>
 			    </nav>
@@ -94,7 +94,7 @@
 						    	<div class="fh5co-owl-text">
 									<h1 class="fh5co-lead ">100% Free</h1>
 									<h2 class="fh5co-sub-lead">All features are free.</h2>
-									<p class=""><a href="#" class="btn btn-primary btn-lg">Get Started</a></p>
+									<p class=""><a href="/register" class="btn btn-primary btn-lg">Get Started</a></p>
 						    	</div>
 						    </div>
 					    </div>
@@ -110,7 +110,7 @@
 						    	<div class="fh5co-owl-text">
 									<h1 class="fh5co-lead ">Private Room</h1>
 									<h2 class="fh5co-sub-lead">Your own private conversation room</h2>
-									<p class=""><a href="#" class="btn btn-primary btn-lg">Get Started</a></p>
+									<p class=""><a href="/register" class="btn btn-primary btn-lg">Get Started</a></p>
 						    	</div>
 						    </div>
 					    </div>
@@ -430,7 +430,7 @@
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2 text-center">
 				<h3>We love to talk about your business. </h3>
-				<p><a href="#" class="btn btn-primary btn-outline btn-lg">Get started</a></p>
+				<p><a href="/register" class="btn btn-primary btn-outline btn-lg">Get started</a></p>
 			</div>
 		</div>
 	</div>
@@ -439,7 +439,7 @@
 		<div class="container">
 			<div class="row row-bottom-padded-sm">
 				<div class="col-md-12">
-					<p class="copyright text-center">&copy; 2016 <a href="index.html">OSpeech</a></p>
+					<p class="copyright text-center">&copy; 2019 <a href="/">OSpeech</a></p>
 				</div>
 			</div>
 			<div class="row">
@@ -463,7 +463,8 @@
 	<script src="./client/library/ospeech.min.js"></script>
 	<script>
 		var ospeech = new OSpeech({
-			appKey:"abc123"
+			appKey:"abc123",
+			defaultOpen: false
 		});
 	
 		ospeech.init();

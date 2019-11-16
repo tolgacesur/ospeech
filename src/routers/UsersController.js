@@ -44,10 +44,7 @@ router.post("/register", (req, res) => {
 									if(err)
 										return console.error(err)
                   let body = {
-                    username : user.username,
-                    email: user.email,
-                    token: token,
-                    room:room.name
+                    token: token
                   }
                   return res.send(body);
                 })

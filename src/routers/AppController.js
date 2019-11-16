@@ -16,9 +16,15 @@ router.get("/app-data", (req, res) => {
             if(err)
                 return res.status(400).send(err);
             let body = {
-                "username":user.username,
-                "email":user.email,
-                "roonname":room.name
+							"user": {
+								"_id":user._id,
+								"username":user.username,
+								"email":user.email
+							},
+							"room": {
+								"_id":room._id,
+                "token":room.token
+							}
             }
             return res.status(200).send(body);
           })

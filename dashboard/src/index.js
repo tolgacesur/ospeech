@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 import App from './app/App';
+
+// Import css files
 import './app/App.scss';
 import './index.css';
 import './assets/highlight/github.css';

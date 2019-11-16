@@ -3,23 +3,40 @@ import { Route } from 'react-router-dom';
 
 import SideMenu from './side-menu/side-menu';
 import Main from './main/main';
-import Profile from './profile/profile';
 import Topnavbar from './topnavbar/topnavbar';
 import Footer from './footer/footer';
+
+import ApiService from '../service/api';
+import Cache from '../service/cache';
 
 import './dashboard.scss';
 
 class Dashboard extends React.Component {
+	constructor(props){
+		super(props)
+
+		this.state = {
+			ready : false
+		}
+	}
 
 	UNSAFE_componentWillMount(){
 		window.document.body.style.backgroundColor = '#f8f9fe';
-	}
+		ApiService.getAppData().then(data => {
+			Cache.setUser(data.user);
+			Cache.setRoom(data.room);
 
-	componentDidMount(){
-		// TODO : Get initialAppData and update Cache here
+			this.setState({
+				ready: true
+			})
+		});
 	}
 
 	render() {
+		if (!this.state.ready){
+			return null
+		}
+
 		return (
 			<div className="body">
 				<SideMenu/>
@@ -28,11 +45,8 @@ class Dashboard extends React.Component {
 					<div className="header bg-gradient-primary pb-6 pt-5 pt-md-8">
 					</div>
 					<div className="container-fluid mt--7">
-						<Route exact path="/dashboard">
+						<Route exact path="/main">
 							<Main />
-						</Route>
-						<Route path="/profile">
-							<Profile />
 						</Route>
 						<Footer/>
 					</div>

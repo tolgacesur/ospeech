@@ -1,31 +1,76 @@
 import React from 'react';
 import Highlight from 'react-highlight.js'
 
+import Cache from '../../service/cache';
 import './main.scss';
-import ApiService from '../../service/api';
 
 class Main extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
+
+		let room = Cache.room;
+
 		this.state = {
-			snippet: `
-				<script src="http://127.0.0.1:3000/client/library/ospeech.min.js"></script>
-				<script>
-					var ospeech = new OSpeech({
-						appKey:"abc123"
-					});
+			copied : false,
+			snippet: 
+`
+    <script src="${window.location.origin}/client/library/ospeech.min.js"></script>
+    <script>
+        var ospeech = new OSpeech({
+            appKey:"${room.token}"
+        });
 
-					ospeech.init();
-				</script>
-			`
+        ospeech.init();
+    </script>
+
+`,
+			api: 
+`
+    var config = {
+        appKey:"${room.token}" //required
+        width: 400 // optional - default 400
+        defaultOpen: true // optional - default true
+
+        // optional
+        onload : function() {
+            console.log("Chat Ready!");
+        }
+    };
+
+`,
+			show: 
+`
+    ospeech.show();
+
+`,
+			hide:
+`
+    ospeech.hide();
+
+`
 		}
+
+		this.copyToClipboard = this.copyToClipboard.bind(this);
 	}
 
-	componentDidMount(){
-		ApiService.getRooms().then(room => {
-			console.log(room);
+	copyToClipboard() {
+		const el = document.createElement('textarea');
+		el.value = this.state.snippet;
+		document.body.appendChild(el);
+		el.select();
+		document.execCommand('copy');
+		document.body.removeChild(el);
+
+		this.setState({
+			copied: true
 		});
-	}
+
+		setTimeout(() => {
+			this.setState({
+				copied: false
+			})
+		}, 2000);
+	};
 
 	render() {
 		return (
@@ -38,9 +83,41 @@ class Main extends React.Component {
 					</div>
 				</div>
 				<div className="card-body">
-					<div className="card">
+					<h1>Get Started</h1>
+					<h3>Learn how to install our beautiful widget and keep your users engaged.</h3>
+					<p>To install our beautiful widget on your website, the first step is to insert our javascript code to your website and you need to instantiate and call the init method, as in the example below:</p>
+					<div className="d-flex justify-content-end">
+						{ !this.state.copied ? <button className="btn btn-sm btn-secondary mb-2" onClick={this.copyToClipboard} >Copy</button> : null }
+						{ this.state.copied ?
+							<button className="btn btn-sm btn-secondary mb-2">
+								<i className="far fa-check-circle mr-1 text-green"></i>
+								Copied
+							</button>
+						: null
+						}
+					</div>
+					<div className="card mb-2">
 						<Highlight language="html">
 							{this.state.snippet}
+						</Highlight>
+					</div>
+					<p>This will create a new chat instance.</p>
+					<h3>Ospeech widget API:</h3>
+					<div className="card mb-2">
+						<Highlight language="js">
+							{this.state.api}
+						</Highlight>
+					</div>
+					<h3 className="my-4">Show widget</h3>
+					<div className="card mb-2">
+						<Highlight language="js">
+							{this.state.show}
+						</Highlight>
+					</div>
+					<h3 className="my-4">Hide widget</h3>
+					<div className="card mb-2">
+						<Highlight language="js">
+							{this.state.hide}
 						</Highlight>
 					</div>
 				</div>

@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const router = express.Router()
 const { User } = require("../models/UsersModel");
 const {Room} = require("../models/RoomsModel");
-var randomstring = require("randomstring");
+const randomstring = require("randomstring");
+
+const accesTokenCookieName = 'ospeech_access_token';
 
 router.use( (req, res, next) => {
     next()
@@ -43,10 +45,9 @@ router.post("/register", (req, res) => {
 							return newroom.save( (err,room) => {
 									if(err)
 										return console.error(err)
-                  let body = {
-                    token: token
-                  }
-                  return res.send(body);
+
+                  res.cookie(accesTokenCookieName, token, { expires: new Date(Date.now() + 168 * 3600000), httpOnly: true })
+                  return res.send({token});
                 })
 							})
           }
@@ -66,12 +67,8 @@ router.post("/login", (req, res) => {
               return res.status(500).send({"error":err})
             if(response){
                 let token = user.generateAuthToken();
-                let body = {
-                  username : user.username,
-                  email: user.email,
-                  token: token
-                }
-                  return res.status(200).send(body);
+                res.cookie(accesTokenCookieName, token, { expires: new Date(Date.now() + 168 * 3600000), httpOnly: true })
+                return res.status(200).send({token});
               }
               else {
                 return res.status(422).send({message: "The email address or password is incorrect. Please retry..."})
@@ -81,6 +78,12 @@ router.post("/login", (req, res) => {
         else
           return res.status(422).send({message: "The email address or password is incorrect. Please retry..."});
       })
+});
+
+router.get('/logout', function(req, res){
+  res.cookie(accesTokenCookieName, '', {expires: new Date(0)});
+
+  return res.send(null);
 });
 
 module.exports = router;

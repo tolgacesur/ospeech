@@ -15,9 +15,7 @@ axios.interceptors.response.use(function (response) {
 }, function (err) {
 
 	if (err.response.status === 401) {
-		ApiService.logout().then(() => {
-			window.location = '/login';
-		});
+		ApiService.logout();
 	}
 
 	err = err.response ? err.response.data : {message : 'Oops Something Went Wrong!'};
@@ -32,26 +30,26 @@ export default class ApiService {
 
 	static login({email, password}){
 		return axios.post(`/user/login`, {email, password}).then(res => {
-			Cache.setUser({username: res.username, email: res.email});
 			localStorage.setItem('ospeech-token', res.token);
 		});
 	}
 
 	static register({username, password, email}){
 		return axios.post(`/user/register`, {username, email, password}).then(res => {
-			Cache.setUser({username: res.username, email: res.email});
 			localStorage.setItem('ospeech-token', res.token);
 		});
 	}
 
-	static getRooms(){
-		return axios.get(`/room`).then(rooms => {
-			return rooms;
+	static getAppData(){
+		return axios.get(`/api/app-data`).then(data => {
+			return data;
 		});
 	}
 
 	static logout(){
-		localStorage.setItem('ospeech-token', '');
-		return Promise.resolve();
+		return axios.get('/user/logout').then(() => {
+			localStorage.setItem('ospeech-token', '');
+			window.location = '/';
+		});
 	}
 }

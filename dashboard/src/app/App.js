@@ -10,7 +10,7 @@ function Home() {
 	const token = ApiService.getToken();
 
 	if (token) {
-		return <Redirect to="/dashboard"/>
+		return <Redirect to="/main"/>
 	}
 
 	return <Redirect to="/login"/>
@@ -22,8 +22,7 @@ function App() {
 			<Route path="/" component={Home}/>
 			<Route path="/login" component={Welcome}/>
 			<Route path="/register" component={Welcome}/>
-			<Route path="/dashboard" component={Dashboard}/>
-			<Route path="/profile" component={Dashboard}/>
+			<Route path="/main" component={Dashboard}/>
 		</Router>
 	);
 }

@@ -16,3 +16,15 @@ exports.verifyUser = (req, res, next)  => {
     res.status(401).send("Invalid token.");
   }
 }
+
+exports.checkCookie = (req, res, next) => {
+  const token = req.cookies.ospeech_access_token;
+
+  // Add user object to request
+  if (token){
+    const decoded = jwt.verify(token, config.secretKey);
+    req.user = decoded;
+  }
+
+  return req.next();
+}

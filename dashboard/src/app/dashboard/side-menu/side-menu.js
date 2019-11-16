@@ -9,15 +9,15 @@ class Sidemenu extends React.Component {
 					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
 						<span className="navbar-toggler-icon"></span>
 					</button>
-					<Link className="navbar-brand pt-0" to="/">
-						<img src="./assets/img/blue.png" className="navbar-brand-img" alt="..."/>
+					<Link className="navbar-brand pt-0" to="/main">
+						<img src={process.env.PUBLIC_URL + "/assets/img/blue.png"} className="navbar-brand-img" alt="..."/>
 					</Link>
 					<ul className="nav align-items-center d-md-none">
 						<li className="nav-item dropdown">
 							<a className="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<div className="media align-items-center">
 									<span className="avatar avatar-sm rounded-circle">
-										<img alt="Image placeholder" src="./assets/img/user.png"/>
+										<img alt="Image placeholder" src={process.env.PUBLIC_URL + "/assets/img/user.png"}/>
 									</span>
 								</div>
 							</a>
@@ -42,7 +42,7 @@ class Sidemenu extends React.Component {
 							<div className="row">
 								<div className="col-6 collapse-brand">
 									<a href="./index.html">
-										<img src="./assets/img/blue.png"/>
+										<img src={process.env.PUBLIC_URL + "/assets/img/blue.png"}/>
 									</a>
 								</div>
 								<div className="col-6 collapse-close">
@@ -55,7 +55,7 @@ class Sidemenu extends React.Component {
 						</div>
 						<ul className="navbar-nav">
 							<li className="nav-item">
-								<NavLink exact className="nav-link" activeClassName="active" to="/dashboard">
+								<NavLink exact className="nav-link" activeClassName="active" to="/main">
 									<i className="ni ni-tv-2 text-primary"></i> Dashboard
 								</NavLink>
 							</li>

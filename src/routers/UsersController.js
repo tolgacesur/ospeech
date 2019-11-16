@@ -1,22 +1,23 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router()
-const { User,validate } = require("../models/UsersModel");
+const { User } = require("../models/UsersModel");
+const {Room} = require("../models/RoomsModel");
+var randomstring = require("randomstring");
 
-router.use(function timeLog (req, res, next) {
-    console.log('Time: ', Date.now())
+router.use( (req, res, next) => {
     next()
 })
 
 // User Register End Point
 router.post("/register", (req, res) => {
   // ToDo validete 
+  console.log(req.body);
     User.findOne({ "email": req.body.email},(err, user) => {
       if(err){
           return res.status(400).send({"err":err});
       } 
-      if (user)
-      {
+      if (user) {
           return res.status(422).send({message: "User has registered!"})
       }
       else
@@ -31,14 +32,26 @@ router.post("/register", (req, res) => {
             return newuser.save( (err,user) => {
               if(err)
                 return res.status(500).send({"error":err})
-  
-              let body = {
-                username : user.username,
-                email: user.email,
-                token: token
-              }
-              return res.send(body);
-            })
+              // Room name user id nin tekrar bir hashlenme ile ortaya çıkan bir id oluyor.
+                let roomname = randomstring.generate(8);
+                 let newsroom = {
+									"name":roomname,
+									"userId":user._id
+								}
+								let newroom = new Room(newsroom)
+								
+							return newroom.save( (err,room) => {
+									if(err)
+										return console.error(err)
+                  let body = {
+                    username : user.username,
+                    email: user.email,
+                    token: token,
+                    room:room.name
+                  }
+                  return res.send(body);
+                })
+							})
           }
         })
       }   

@@ -6,7 +6,9 @@ const MessageSchema = new mongoose.Schema({
     roomId:{type:String,required:true},
     createdAt:{type:Date,required:true},
     deletedAt:{type:Date,required:false}
-})
+},
+{ versionKey: false }
+)
 
 exports.Message = mongoose.model("Message",MessageSchema)
 

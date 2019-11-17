@@ -16,20 +16,21 @@ class Main extends React.Component {
 `
     <script src="${window.location.origin}/client/library/ospeech.min.js"></script>
     <script>
-        var ospeech = new OSpeech({
+        var config = {
             appKey:"${room.token}"
-        });
+        }
 
+        var ospeech = new OSpeech(config);
         ospeech.init();
     </script>
 
 `,
-			api: 
+			api:
 `
     var config = {
-        appKey:"${room.token}" //required
-        width: 400 // optional - default 400
-        defaultOpen: true // optional - default true
+        appKey:"${room.token}", //required
+        width: 400,            // optional - default 400
+        defaultOpen: false     // optional - default false
 
         // optional
         onload : function() {

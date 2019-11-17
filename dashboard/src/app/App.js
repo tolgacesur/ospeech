@@ -13,7 +13,7 @@ function Home() {
 		return <Redirect to="/main"/>
 	}
 
-	return <Redirect to="/login"/>
+	return null
 }
 
 function App() {

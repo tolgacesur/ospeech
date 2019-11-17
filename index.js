@@ -35,6 +35,10 @@ app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')))
 app.use('/client', express.static(path.join(__dirname, 'public/client')))
 app.use('/', express.static(path.join(__dirname, 'public/landing')))
 
+app.get('*', (req, res) => {
+    res.redirect('/')
+})
+
 // Socket Services
 socketService.socketConnection(io);
 

@@ -1,4 +1,4 @@
-var mainUrl = 'http://127.0.0.1:3000'; // TODO : Get this url as environment
+var mainUrl = 'http://ospeech.org'; // TODO : Get this url as environment
 var chatBox = ChatBox();
 	chatBox.init();
 

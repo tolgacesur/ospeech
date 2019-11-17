@@ -1,5 +1,4 @@
 const msgsave = require('./MessageSaveService')
-const config = require('../../config')
 const {Room} = require("../models/RoomsModel");
 /**
  * Socket 
@@ -27,7 +26,7 @@ module.exports.socketConnection = function(io) {
 }
 
 function roomValidate ( room, cb) {
-    Room.findOne({'roomname': room.toString()}, (err, findroom) => {
+    Room.findOne({'key': room.toString()}, (err, findroom) => {
         if(findroom)
             return cb(true);
         else

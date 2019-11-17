@@ -23,7 +23,7 @@ router.get("/app-data", (req, res) => {
 							},
 							"room": {
 								"_id":room._id,
-                "token":room.name
+                "key":room.key
 							}
             }
             return res.status(200).send(body);

@@ -15,9 +15,9 @@ class Footer extends React.Component {
 						<div className="col-xl-6">
 						<ul className="nav nav-footer justify-content-center justify-content-xl-end">
 							<li className="nav-item">
-								<Link className="nav-link" to="/">
+								<a className="nav-link" href="/">
 									Ospeech
-								</Link>
+								</a>
 							</li>
 						</ul>
 						</div>

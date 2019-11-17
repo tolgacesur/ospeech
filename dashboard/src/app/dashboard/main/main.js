@@ -17,7 +17,7 @@ class Main extends React.Component {
     <script src="${window.location.origin}/client/library/ospeech.min.js"></script>
     <script>
         var config = {
-            appKey:"${room.token}"
+            appKey:"${room.key}"
         }
 
         var ospeech = new OSpeech(config);
@@ -28,7 +28,7 @@ class Main extends React.Component {
 			api:
 `
     var config = {
-        appKey:"${room.token}", //required
+        appKey:"${room.key}", //required
         width: 400,            // optional - default 400
         defaultOpen: false     // optional - default false
 

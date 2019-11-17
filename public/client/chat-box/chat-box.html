@@ -19,7 +19,7 @@
 <body>
 	<div class="d-flex flex-column" style="height: 100%">
 		<div class="d-flex align-items-center flex-shrink-0 p-2">
-			<div class="flex-grow-1 text-white p-2">OSpeech</div>
+			<div class="flex-grow-1 text-white p-2"></div>
 			<button class="btn btn-sm btn-light mr-3" id="user-popover" title="Change Username" data-toggle="popover" popover-content="#user-popover-template">
 					<img width="20" height="20" class="mt-1" src="./assets/svg/group.svg" alt="User">
 			</button>
@@ -56,6 +56,8 @@
 	</div>
 
 	<div id="feedback-popover-template">
+		<div class="alert alert-success mb-1" id="feedback-success-alert" >Thanks for your feedback!</div>
+		<div class="alert alert-danger mb-1" id="feedback-danger-alert" >Something went wrong!</div>
 		<input class="form-control mb-2" placeholder="Email" type="text" id="feedback-email-input">
 		<textarea class="form-control mb-2" style="resize: none; overflow: hidden;" placeholder="Enter your feedback" id="feedback-message-input" rows="2"></textarea>
 		<button class="btn btn-success mb-2 float-right" id="send-feedback-button">Send</button>

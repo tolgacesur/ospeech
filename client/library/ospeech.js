@@ -3,15 +3,15 @@ export default function OSpeech(config) {
 		return new OSpeech();
 	}
 
-	this.appKey = "test";
+	this.appKey = "";
 	this.width = 400;
-	this.defaultOpen = true;
+	this.defaultOpen = false;
 	this.onload = null;
 
 	// Private properties
-	this.username = localStorage.getItem('ospeech-username');
 	this.chatBox = null;
 	this.toggleButton = null;
+	this.mobileToggleButton = null;
 
 	this.init = function() {
 		// Config Validation
@@ -24,19 +24,20 @@ export default function OSpeech(config) {
 		container.style.height = '100%';
 		container.style.position = "absolute";
 		container.style.top = "0px";
-		container.style.right = "0px";
 		container.style.zIndex = 1000;
 		document.body.appendChild(container);
 
 		// Create chat box
 		// TODO : this html source should come from server
-		var src = `../client/chat-box/chat-box.html?appKey=${this.appKey}&username=${this.username}`;
+		var src = `../client/chat-box/chat-box.html?appKey=${this.appKey}`;
 		this.chatBox = document.createElement('iframe');
 		this.chatBox.setAttribute("src", src);
+		this.chatBox.id = 'ospeech-chatbox';
 		this.chatBox.style.height = '100%';
 		this.chatBox.style.position = "fixed";
 		this.chatBox.style.top = "0px";
 		this.chatBox.style.right = "0px";
+		this.chatBox.width = this.width + 'px';
 		this.chatBox.style.zIndex = 1000;
 		this.chatBox.frameBorder = "0";
 		this.chatBox.style.transition = '.2s';
@@ -80,6 +81,28 @@ export default function OSpeech(config) {
 		this.toggleButton.onclick = this.toggle.bind(this);
 		container.appendChild(this.toggleButton);
 
+
+		// Create toggle button for mobile
+		this.mobileToggleButton = document.createElement('button');
+		this.mobileToggleButton.innerHTML = "<img height=25 src='../client/library/assets/img/logout.png'>";
+		this.mobileToggleButton.style.cssText =`
+			border: none;
+			background: none;
+			color: white;
+			text-align: center;
+			text-decoration: none;
+			cursor: pointer;
+			top: 10px;
+			z-index: 1000;
+			font-size: 16px;`
+		this.mobileToggleButton.style.position = 'fixed';
+		this.mobileToggleButton.style.transition = '.2s';
+		this.mobileToggleButton.style.webkitTransition = '.2s';
+		this.mobileToggleButton.style.mozTransition = '.2s';
+		this.mobileToggleButton.style.oTransition = '.2s';
+		this.mobileToggleButton.onclick = this.hide.bind(this);
+		container.appendChild(this.mobileToggleButton);
+
 		if (this.defaultOpen){
 			this.show();
 		} else {
@@ -98,31 +121,48 @@ export default function OSpeech(config) {
 	this.hide = function() {
 		this.chatBox.style.width = '0px';
 		this.toggleButton.style.right = - (this.toggleButton.scrollHeight / 2) -29 + 'px';
+		this.mobileToggleButton.style.right = - this.width + 'px';
 	}
 
 	this.show = function() {
-		this.chatBox.style.width = '400px';
+		this.chatBox.style.width = this.width + 'px';
 		this.toggleButton.style.right = this.width - (this.toggleButton.scrollHeight / 2) -25  + 'px';
+
+		var deviceWith = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		if (this.width >= deviceWith){
+			this.mobileToggleButton.style.right = this.width - 45 + 'px';
+		}
 	}
 
-	// TODO : In future print console warnings
 	this.validateConfig = function(config) {
 		if (config){
 			if (typeof(config.width) !== 'number'){
-				config.width = this.width;
-			} else {
-				// Width of widget should be lesser than device width
-				var deviceWith = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-				if (config.width > deviceWith){
-					config.width = deviceWith;
+				if (typeof(config.width) !== 'undefined'){
+					console.warn("Opseech invalid width value: ", config.width);
 				}
+
+				config.width = this.width;
+			}
+
+			// Width of widget should be lesser than device width
+			var deviceWith = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+			if (config.width > deviceWith){
+				config.width = deviceWith;
 			}
 		
 			if (typeof(config.defaultOpen) !== 'boolean'){
+				if (typeof(config.defaultOpen) !== 'undefined'){
+					console.warn("Opseech invalid defaultOpen value: ", config.defaultOpen);
+				}
+
 				config.defaultOpen = this.defaultOpen;
 			}
 	
 			if (typeof(config.onload) !== 'function'){
+				if (typeof(config.onload) !== 'undefined'){
+					console.warn("Opseech invalid onload function: ", config.onload);
+				}
+
 				config.onload = this.onload;
 			}
 		}

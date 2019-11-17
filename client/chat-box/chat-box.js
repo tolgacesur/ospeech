@@ -7,10 +7,11 @@ function ChatBox() {
 		return new ChatBox();
 	}
 
+	this.username = localStorage.getItem('ospeech-username');
 	this.messages = [];
 
 	this.init = function() {
-		this.options = this.getOptions(); // appKey, username
+		this.options = this.getOptions(); // appKey
 		this.socket = this.createSocket();
 
 		this.addChatBoxListeners();
@@ -53,7 +54,7 @@ function ChatBox() {
 			<p class="mb-1">${data.message}</p>
 		</div>`;
 
-		if (this.options.username === data.username) {
+		if (this.username === data.username) {
 			messageElement.className += 'right';
 		} else {
 			messageElement.className += 'left';
@@ -63,7 +64,7 @@ function ChatBox() {
 		allMessages.appendChild(messageElement);
 
 
-		if (data.username === this.options.username) {
+		if (data.username === this.username) {
 			// Scroll to bottom
 			var messagesElem = document.getElementById("messages");
 			messagesElem.scrollTop = messagesElem.scrollHeight;
@@ -71,7 +72,7 @@ function ChatBox() {
 	}
 
 	this.sendMessage = function(message) {
-		this.socket.emit('send-message', {username: this.options.username, message, roomId: this.options.appKey});
+		this.socket.emit('send-message', {username: this.username, message, roomId: this.options.appKey});
 	}
 
 	this.addChatBoxListeners = function() {
@@ -114,14 +115,13 @@ function ChatBox() {
 		var saveNameButton = document.querySelector("#save-name-button");
 		var nameInputElement = document.querySelector("#name-input");
 
-		self = this;
 		saveNameButton.onclick = function() {
 			if (!nameInputElement.value.length){
 				return;
 			}
 
-			self.options.username = nameInputElement.value;
-			localStorage.setItem('ospeech-username', self.options.username);
+			self.username = nameInputElement.value;
+			localStorage.setItem('ospeech-username', self.username);
 
 			nameInputElement.value = '';
 			self.setFormVisibiliy();
@@ -134,13 +134,19 @@ function ChatBox() {
 
 			// Number 13 is the "Enter" key on the keyboard
 			if (event.keyCode === 13) {
-				self.options.username = nameInputElement.value;
-				localStorage.setItem('ospeech-username', self.options.username);
+				self.username = nameInputElement.value;
+				localStorage.setItem('ospeech-username', self.username);
 
 				nameInputElement.value = '';
 				self.setFormVisibiliy();
 			}
 		});
+
+
+		var feedbackSuccessAlert = document.getElementById('feedback-success-alert');
+		var feedbackDangerAlert = document.getElementById('feedback-danger-alert');
+		feedbackSuccessAlert.style.display = 'none';
+		feedbackDangerAlert.style.display = 'none';
 
 		$('#feedback-popover').on('shown.bs.popover', function () {
 			var feedbackEmailInput = document.querySelector('.popover-body #feedback-email-input');
@@ -165,7 +171,25 @@ function ChatBox() {
 				}).done(function(){
 					feedbackEmailInput.value = '';
 					feedbackMessageInput.value = '';
-				});
+
+					// Show success message
+					var feedbackSuccessAlert = document.querySelector('.popover-body #feedback-success-alert');
+					feedbackSuccessAlert.style.display = 'block';
+
+					setTimeout(function(){
+						feedbackSuccessAlert.style.display = 'none';
+					}, 3000);
+
+				}).fail(function(){
+
+					// Show error message
+					var feedbackDangerAlert = document.querySelector('.popover-body #feedback-danger-alert');
+					feedbackDangerAlert.style.display = 'block';
+
+					setTimeout(function(){
+						feedbackDangerAlert.style.display = 'none';
+					}, 3000);
+				})
 			}
 
 			// Reset input size
@@ -185,14 +209,14 @@ function ChatBox() {
 
 		$('#user-popover').on('shown.bs.popover', function () {
 			var userNameInput = document.querySelector('.popover-body #user-name-input');
-			userNameInput.value = self.options.username;
+			userNameInput.value = self.username;
 			userNameInput.placeholder = 'Username';
 
 			var saveUsernameButton = document.querySelector('.popover-body #save-name-button');
 			saveUsernameButton.onclick = function() {
 				var newUsername = userNameInput.value;
-				self.options.username = newUsername;
-				localStorage.setItem('ospeech-username', self.options.username);
+				self.username = newUsername;
+				localStorage.setItem('ospeech-username', self.username);
 			}
 		});
 	}
@@ -201,7 +225,7 @@ function ChatBox() {
 		var nameContainer = document.getElementById('name-container');
 		var messageInputContainer = document.getElementById('message-input-container');
 
-		if (!this.options.username){
+		if (!this.username){
 			nameContainer.style.display = 'block';
 			messageInputContainer.style.display = 'none';
 			nameContainer.focus();

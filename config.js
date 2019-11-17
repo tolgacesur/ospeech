@@ -1,7 +1,16 @@
-// TODO: We should use .env file or config.js file should be in .gitignore file
+require('dotenv').config()
+
 var config = {
-        dburi: "mongodb://127.0.0.1:27017/ospeech",
-        secretKey: "momix",
-        port:3000
+        database: {
+                name:process.env.DB_NAME,
+                host:process.env.DB_HOST,
+                port:process.env.DB_PORT,
+                username:process.env.DB_USERNAME,
+                password:process.env.DB_PASSWORD
+        },
+	server : {
+		port : process.env.PORT || process.env.APP_PORT
+	},
+        secretKey: process.env.JWT_SECRET_KEY,
 }
 module.exports = config;

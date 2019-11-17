@@ -12,7 +12,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 // DB connection
-mongoose.connect(config.dburi, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true }, err => console.log(err ? err : 'Mongo connected.'))
+mongoose.connect(`mongodb://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}`, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true }, err => console.log(err ? err : 'Mongo connected.'))
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
@@ -40,4 +40,4 @@ socketService.socketConnection(io);
 
 global.__basedir = __dirname;
 
-http.listen(config.port, () => console.log(`Application listening on port ${config.port}!`))
+http.listen(config.server.port, () => console.log(`Application listening on port ${config.server.port}!`))

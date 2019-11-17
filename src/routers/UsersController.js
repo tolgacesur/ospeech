@@ -13,8 +13,6 @@ router.use( (req, res, next) => {
 
 // User Register End Point
 router.post("/register", (req, res) => {
-  // ToDo validete 
-  console.log(req.body);
     User.findOne({ "email": req.body.email},(err, user) => {
       if(err){
           return res.status(400).send({"err":err});
@@ -35,9 +33,9 @@ router.post("/register", (req, res) => {
               if(err)
                 return res.status(500).send({"error":err})
               // Room name user id nin tekrar bir hashlenme ile ortaya çıkan bir id oluyor.
-                let roomname = randomstring.generate(8);
+                let key = randomstring.generate(8);
                  let newsroom = {
-									"name":roomname,
+									"key":key,
 									"userId":user._id
 								}
 								let newroom = new Room(newsroom)

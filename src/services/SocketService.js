@@ -27,7 +27,6 @@ module.exports.socketConnection = function(io) {
 }
 
 function roomValidate ( room, cb) {
-    console.log(room)
     Room.findOne({'roomname': room.toString()}, (err, findroom) => {
         if(findroom)
             return cb(true);

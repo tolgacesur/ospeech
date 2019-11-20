@@ -34,6 +34,7 @@ app.use('/', auth.checkCookie, welcome)
 app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')))
 app.use('/client', express.static(path.join(__dirname, 'public/client')))
 app.use('/', express.static(path.join(__dirname, 'public/landing')))
+app.use('/landing2', express.static(path.join(__dirname, 'public/landing2')))
 
 app.get('*', (req, res) => {
     res.redirect('/')

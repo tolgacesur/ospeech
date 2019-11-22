@@ -117,7 +117,7 @@ class Login extends React.Component {
 						</div>
 						<div className="row mt-3">
 							<div className="col-6">
-								<Link className="text-light" to="/register">
+								<Link to="/register">
 									<small>Create new account</small>
 								</Link>
 							</div>

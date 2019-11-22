@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import ApiService from '../../service/api';
+
 class Sidemenu extends React.Component {
+
+	logout(){
+		ApiService.logout();
+	}
+
 	render() {
 		return (
 			<nav className="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -25,15 +32,11 @@ class Sidemenu extends React.Component {
 								<div className=" dropdown-header noti-title">
 									<h6 className="text-overflow m-0">Welcome!</h6>
 								</div>
-								<Link to="/profile" className="dropdown-item">
-									<i className="ni ni-single-02"></i>
-									<span>My profile</span>
-								</Link>
 								<div className="dropdown-divider"></div>
-								<a href="#" className="dropdown-item">
+								<Link to="" onClick={this.logout} className="dropdown-item">
 									<i className="ni ni-user-run"></i>
 									<span>Logout</span>
-								</a>
+								</Link>
 							</div>
 						</li>
 					</ul>

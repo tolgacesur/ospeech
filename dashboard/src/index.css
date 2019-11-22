@@ -1,0 +1,9 @@
+.navbar-light .navbar-nav .nav-link {
+	color : rgb(247, 250, 252);
+}
+
+@media(max-width: 767.98px){
+	.navbar-nav .nav-link {
+		color : #283449 !important;
+	}
+}

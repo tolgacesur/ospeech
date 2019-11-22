@@ -28,7 +28,7 @@ class Main extends React.Component {
 			api:
 `
     var config = {
-        appKey:"${room.key}", //required
+        appKey:"${room.key}",     //required
         width: 400,            // optional - default 400
         defaultOpen: false     // optional - default false
 

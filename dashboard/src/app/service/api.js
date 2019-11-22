@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Cache from './cache';
 
-axios.defaults.baseURL = 'http://ospeech.org';
+axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
@@ -14,12 +13,15 @@ axios.interceptors.response.use(function (response) {
 	return response ? response.data || {} : {};
 }, function (err) {
 
-	if (err.response.status === 401) {
+	if (err.response && err.response.status === 401) {
 		ApiService.logout();
 	}
 
-	err = err.response ? err.response.data : {message : 'Oops Something Went Wrong!'};
-	return Promise.reject(err);
+	if (!err.response || !err.response.data || !err.response.data.message){
+		return Promise.reject({message : 'Oops Something Went Wrong!'});
+	}
+
+	return Promise.reject(err.response.data);
 });
 
 export default class ApiService {

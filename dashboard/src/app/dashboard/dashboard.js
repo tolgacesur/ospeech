@@ -21,7 +21,6 @@ class Dashboard extends React.Component {
 	}
 
 	UNSAFE_componentWillMount(){
-		window.document.body.style.backgroundColor = '#f8f9fe';
 		ApiService.getAppData().then(data => {
 			Cache.setUser(data.user);
 			Cache.setRoom(data.room);
@@ -42,7 +41,7 @@ class Dashboard extends React.Component {
 				<SideMenu/>
 				<div className="main-content">
 					<Topnavbar/>
-					<div className="header bg-gradient-primary pb-6 pt-5 pt-md-8">
+					<div className="header bg-primary pb-6 pt-5 pt-md-8">
 					</div>
 					<div className="container-fluid mt--7">
 						<Route exact path="/main">

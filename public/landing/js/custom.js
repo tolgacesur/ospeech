@@ -19,15 +19,37 @@ function toggleChat(){
 var successAlertElement = document.getElementById('alert-success');
 successAlertElement.style.display = 'none';
 
+var errorAllFields = document.getElementById('alert-error-fill-all');
+errorAllFields.style.display = 'none';
+
+var errorEmail = document.getElementById('alert-error-invalid-email');
+errorEmail.style.display = 'none';
+
+var errorElement = document.getElementById('alert-error-occured');
+errorElement.style.display = 'none';
+
 function sendMessage(){
+	successAlertElement.style.display = 'none';
+	errorElement.style.display = 'none';
+
 	var emailFieldElement = document.querySelector('#email-field');
 	var messageFieldElement = document.querySelector('#message-field');
 	var email = emailFieldElement.value;
 	var message = messageFieldElement.value;
 
 	if (!email || !message){
+		errorAllFields.style.display = 'block';
 		return;
 	}
+
+	errorAllFields.style.display = 'none';
+
+	if (!isEmailAddress(email)){
+		errorEmail.style.display = 'block';
+		return;
+	}
+
+	errorEmail.style.display = 'none';
 
 	$.ajax('/feedbacks/send', {
 		data : JSON.stringify({
@@ -41,7 +63,9 @@ function sendMessage(){
 		emailFieldElement.value = '';
 		messageFieldElement.value = '';
 		successAlertElement.style.display = 'block';
-	});
+	}).fail(function(){
+		errorElement.style.display = 'block';
+	})
 }
 
 function getStarted(){
@@ -53,4 +77,9 @@ function getStarted(){
 	}
 
 	window.location = url;
+}
+
+function isEmailAddress(str) {
+	const pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	return pattern.test(str);
 }

@@ -1939,3 +1939,84 @@
 }
 
 html{scroll-behavior:smooth}
+
+/* Badge */
+
+.badge-container {
+  font-family: 'Allerta Stencil', sans-serif;
+  padding: 0;
+  margin: 70px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -62px;
+  left: -149px;
+}
+.badge {
+  position: relative;
+  letter-spacing: 0.08em;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  transform: rotate(-14deg);
+  text-align: center;
+  filter: drop-shadow(0.25em 0.7em 0.95em rgba(0, 0, 0, 0.3));
+ /* min-size + (max-size - min-size) * ( (100vw - min-width) / ( max-width - min-width) ) */
+  font-size: calc(11px + 14 * ( (100vw - 420px) / ( 860) ));
+}
+@media screen and (max-width: 420px) {
+  .badge {
+    font-size: 11px;
+ }
+}
+@media screen and (min-width: 1280px) {
+  .badge {
+    font-size: 25px;
+ }
+}
+.badge::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 5em;
+  height: 5em;
+  border-radius: 100%;
+  background: #f66c7a;
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
+}
+.badge:hover {
+  color: #fff;
+  text-decoration: none;
+  transform: rotate(-10deg) scale(1.05);
+}
+.badge:hover::before {
+  opacity: 0.9;
+}
+.badge svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  z-index: 0;
+  width: 5em;
+  height: 5em;
+}
+.badge span {
+  display: block;
+  background: #f66c7a;
+  border-radius: 0.4em;
+  padding: 0.4em 1em;
+  z-index: 1;
+  min-width: 11em;
+  border: 1px solid;
+  text-transform: uppercase;
+}

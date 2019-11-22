@@ -33,7 +33,7 @@
 	<div class="site-wrapper">
 		<header id="header" class="site-header">
 			<div class="container">
-				<div class="row justify-content-center align-items-center position-relative">
+				<div class="row align-items-center position-relative">
 					<div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
 						<div class="brand">
 							<a href="#main">Ospeech</a>
@@ -61,6 +61,10 @@
 						</div>
 						<div class="mobile-menu"></div>
 					</div>
+					<div class="d-flex d-md-none ml-1">
+						<a href="/login" class="btn btn-sm">Sign In</a>
+						<a href="/register" class="btn btn-sm">Register</a>
+					</div>
 				</div>
 			</div>
 		</header>
@@ -77,6 +81,28 @@
 							<h1>Live Chat Room For Your Website</h1>
 							<p>Interact with your visitors by adding a chat room to the your web page. It's 100% free and no coding required.
 							</p>
+							<div class="badge-container d-none d-md-block">
+								<a href="/register" class="badge">
+									<svg viewBox="0 0 210 210">
+										<g stroke="none" fill="none">
+											<path d="M22,104.5 C22,58.9365081 58.9365081,22 104.5,22 C150.063492,22 187,58.9365081 187,104.5" id="top"></path>
+											<path d="M22,104.5 C22,150.063492 58.9365081,187 104.5,187 C150.063492,187 187,150.063492 187,104.5" id="bottom"></path>
+										</g>
+												<circle cx="105" cy="105" r="62" stroke="currentColor" stroke-width="1" fill="none" />
+										<text width="200" font-size="20" fill="currentColor">
+											<textPath startOffset="50%" text-anchor="middle" alignment-baseline="middle" xlink:href="#top">
+												OSPEECH
+											</textPath>
+										</text>
+										<text width="200" font-size="20" fill="currentColor">
+											<textPath startOffset="50%" text-anchor="middle" alignment-baseline="middle" xlink:href="#bottom">
+												Live Chat Room
+											</textPath>
+										</text>
+									</svg>
+									<span>%100 FREE</span>
+								</a>
+							</div>
 							<div class="hero-form">
 								<form action="">
 									<div class="form-group">
@@ -238,6 +264,15 @@
 								<div id="alert-success" class="alert alert-slim alert-success">
 									Thanks for your message! We will reply as soon as possible.
 								</div>
+								<div id="alert-error-fill-all" class="alert alert-slim alert-danger">
+									Please enter all fields.
+								</div>
+								<div id="alert-error-invalid-email" class="alert alert-slim alert-danger">
+									Please enter an valid email address.
+								</div>
+								<div id="alert-error-occured" class="alert alert-slim alert-danger">
+									Something went wrong.
+								</div>
 								<div class="content-btn">
 									<a href="javascript:void(0)" onclick="sendMessage()" class="btn btn--primary">Send</a>
 								</div>
@@ -284,6 +319,9 @@
 							<p>© 2019  All right reserved.  </p>
 						</div>
 					</div>
+				</div>
+				<div class="text-center mt-4">
+					<a href="mailto:support@ospeech.org">support@ospeech.org</a>
 				</div>
 				<div class="text-center mt-4">
 					<style>.heart{color:#e25555; font-size: 16px;}</style>

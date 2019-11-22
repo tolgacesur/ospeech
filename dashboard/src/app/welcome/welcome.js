@@ -9,9 +9,6 @@ import Header from './header/header';
 import './welcome.scss';
 
 class Welcome extends React.Component {
-	UNSAFE_componentWillMount(){
-		window.document.body.style.backgroundColor = '#172b4d';
-	}
 
 	render() {
 		return (

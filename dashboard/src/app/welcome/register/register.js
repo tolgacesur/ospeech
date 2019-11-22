@@ -139,7 +139,7 @@ class Register extends React.Component {
 						</div>
 						<div className="row mt-3">
 							<div className="col-6">
-								<Link className="text-light" to="/login">
+								<Link to="/login">
 									<small>Already have an account?</small>
 								</Link>
 							</div>

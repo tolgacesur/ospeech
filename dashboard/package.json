@@ -14,10 +14,8 @@
   "homepage": "./dashboard",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "cp -R ./build/. ../public/dashboard",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "postbuild": "cp -R ./build/. ../public/dashboard"
   },
   "eslintConfig": {
     "extends": "react-app"

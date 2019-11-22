@@ -23,7 +23,7 @@ class Topnavbar extends React.Component {
 		return (
 			<nav className="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 				<div className="container-fluid justify-content-end">
-					<div className="text-white text-right">
+					<div className="text-white text-right d-none d-md-block">
 						<div>
 							<small>{this.state.user.username}</small>
 						</div>

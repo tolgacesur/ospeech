@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Topnavbar extends React.Component {
 	render() {
 		return (
-			<nav className="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+			<nav className="navbar navbar-top navbar-horizontal navbar-expand-md navbar-light">
 				<div className="container px-4">
 					<a className="navbar-brand" href="/">
 						<img alt="Logo" src={process.env.PUBLIC_URL + "/assets/img/white.png"} />
@@ -20,6 +20,8 @@ class Topnavbar extends React.Component {
 						</div>
 						<div className="col-6 collapse-close">
 							<button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+								<span></span>
+								<span></span>
 							</button>
 						</div>
 						</div>

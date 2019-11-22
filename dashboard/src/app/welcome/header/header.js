@@ -3,7 +3,7 @@ import React from 'react';
 class Header extends React.Component {
 	render() {
 		return (
-			<div className="header bg-gradient-primary py-7 py-lg-8">
+			<div className="header bg-primary py-7 py-lg-8">
 				<div className="container">
 					<div className="header-body text-center mb-5 mt-5">
 						<div className="row justify-content-center">

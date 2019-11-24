@@ -17,7 +17,7 @@ class Sidemenu extends React.Component {
 						<span className="navbar-toggler-icon"></span>
 					</button>
 					<Link className="navbar-brand pt-0" to="/main">
-						<img src={process.env.PUBLIC_URL + "/assets/img/blue.png"} className="navbar-brand-img" alt="..."/>
+						<img src={process.env.PUBLIC_URL + "/assets/img/header-logo.png"} className="navbar-brand-img" alt="..."/>
 					</Link>
 					<ul className="nav align-items-center d-md-none">
 						<li className="nav-item dropdown">
@@ -45,7 +45,7 @@ class Sidemenu extends React.Component {
 							<div className="row">
 								<div className="col-6 collapse-brand">
 									<a href="./index.html">
-										<img src={process.env.PUBLIC_URL + "/assets/img/blue.png"}/>
+										<img src={process.env.PUBLIC_URL + "/assets/img/header-logo.png"}/>
 									</a>
 								</div>
 								<div className="col-6 collapse-close">

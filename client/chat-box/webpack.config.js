@@ -1,8 +1,9 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var Dotenv = require('dotenv-webpack');
 var path = require('path');
 
-module.exports = {
+module.exports = (env) => ({
 	entry: './chat-box.js',
 	output: {
 		filename: 'chat-box.js',
@@ -20,6 +21,9 @@ module.exports = {
 			filename: 'chat-box.css',
 			chunkFilename: '[id].css',
 			ignoreOrder: false, // Enable to remove warnings about conflicting order
+		}),
+		new Dotenv({
+			path: `./.env.${env.production ? "prod" : "dev"}`,
 		})
 	],
 	module: {
@@ -41,4 +45,4 @@ module.exports = {
 			},
 		],
 	}
-};
+});

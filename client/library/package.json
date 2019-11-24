@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --watch --mode=development",
-    "build": "webpack --mode=production",
+    "build": "webpack --mode=production --env.production",
     "postbuild": "cp -R ./dist/. ../../public/client/library/ && cp -R ./assets/. ../../public/client/library/assets"
   },
   "author": "",
@@ -13,5 +13,8 @@
   "devDependencies": {
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "dotenv-webpack": "^1.7.0"
   }
 }

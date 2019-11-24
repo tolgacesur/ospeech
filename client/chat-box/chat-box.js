@@ -1,4 +1,3 @@
-var mainUrl = 'http://ospeech.org'; // TODO : Get this url as environment
 var chatBox = ChatBox();
 	chatBox.init();
 
@@ -21,7 +20,7 @@ function ChatBox() {
 	}
 
 	this.createSocket = function() {
-		var socket = io(mainUrl, {
+		var socket = io(process.env.WS_URL, {
 			reconnectionDelay: 250,
 			reconnectionAttempts: 3
 		});
@@ -160,7 +159,7 @@ function ChatBox() {
 					return;
 				}
 
-				$.ajax(mainUrl + '/feedbacks/send', {
+				$.ajax(process.env.API_URL + '/feedbacks/send', {
 					data : JSON.stringify({
 						email,
 						message,

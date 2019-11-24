@@ -21,15 +21,11 @@ export default function OSpeech(config) {
 		Object.assign(this, config);
 
 		var container = document.createElement('div');
-		container.style.height = '100%';
-		container.style.position = "absolute";
-		container.style.top = "0px";
 		container.style.zIndex = 1000;
 		document.body.appendChild(container);
 
 		// Create chat box
-		// TODO : this html source should come from server
-		var src = `../client/chat-box/chat-box.html?appKey=${this.appKey}`;
+		var src = `${process.env.CHATBOX_URL}?appKey=${this.appKey}`;
 		this.chatBox = document.createElement('iframe');
 		this.chatBox.setAttribute("src", src);
 		this.chatBox.id = 'ospeech-chatbox';
@@ -37,6 +33,7 @@ export default function OSpeech(config) {
 		this.chatBox.style.position = "fixed";
 		this.chatBox.style.top = "0px";
 		this.chatBox.style.right = "0px";
+		this.chatBox.style.width = "0px";
 		this.chatBox.width = this.width + 'px';
 		this.chatBox.style.zIndex = 1000;
 		this.chatBox.frameBorder = "0";
@@ -60,7 +57,6 @@ export default function OSpeech(config) {
 		this.toggleButton.style.cssText =`
 			background-color: #080e7c;
 			border: none;
-			color: white;
 			padding: 15px 32px;
 			text-align: center;
 			text-decoration: none;
@@ -68,8 +64,7 @@ export default function OSpeech(config) {
 			border-radius: 5px 5px 0px 0px;
 			outline: none;
 			cursor: pointer;
-			align-items: center;
-			font-size: 16px;`
+			align-items: center;`
 		this.toggleButton.style.position = "fixed";
 		this.toggleButton.style.top = this.chatBox.offsetHeight / 2 + 'px';
 		this.toggleButton.style.transform = 'rotate(-90deg)';
@@ -77,8 +72,25 @@ export default function OSpeech(config) {
 		this.toggleButton.style.webkitTransition = '.2s';
 		this.toggleButton.style.mozTransition = '.2s';
 		this.toggleButton.style.oTransition = '.2s';
-		this.toggleButton.innerHTML = "<img width=25 height=25 src='../client/library/assets/svg/planet-earth.svg' style='margin-right:5px;'><span>OSpeech</span>";
 		this.toggleButton.onclick = this.toggle.bind(this);
+
+		var imgElement = document.createElement('img');
+		imgElement.width = '25';
+		imgElement.height = '25';
+		imgElement.src = '../client/library/assets/svg/planet-earth.svg';
+		imgElement.style.marginRight = '5px';
+		this.toggleButton.appendChild(imgElement);
+
+		var textElement = document.createElement('span');
+		textElement.textContent = 'Ospeech'
+		textElement.style.cssText = `
+			color: #ffff;
+			line-height: normal;
+			font-family : arial;
+			font-weigth : 400;
+			font-size: 16px;`;
+		this.toggleButton.appendChild(textElement);
+
 		container.appendChild(this.toggleButton);
 
 

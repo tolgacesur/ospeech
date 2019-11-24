@@ -1,6 +1,7 @@
-const path = require('path');
+var Dotenv = require('dotenv-webpack');
+var path = require('path');
 
-module.exports = {
+module.exports = (env) => ({
 	entry: './ospeech.js',
 	output: {
 		filename: 'ospeech.min.js',
@@ -9,5 +10,10 @@ module.exports = {
 		libraryTarget: 'window',
 		libraryExport: 'default'
 	},
+	plugins : [
+		new Dotenv({
+			path: `./.env.${env.production ? "prod" : "dev"}`,
+		})
+	],
 	module: {}
-};
+});

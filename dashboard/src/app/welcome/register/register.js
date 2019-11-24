@@ -26,6 +26,15 @@ class Register extends React.Component {
 		this.isEmailAddress = this.isEmailAddress.bind(this);
 	}
 
+	componentDidMount() {
+		const email = this.getQueryStringValue('email');
+		if (email){
+			this.setState({
+				email: email
+			})
+		}
+	}
+
 	register() {
 		let nameInvalid = !this.state.name.length;
 		let emailInvalid = !this.isEmailAddress(this.state.email);
@@ -81,6 +90,10 @@ class Register extends React.Component {
 	isEmailAddress(str) {
 		const pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		return pattern.test(str);
+	}
+
+	getQueryStringValue (key) {
+		return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
 	}
 
 	render() {

@@ -10,7 +10,7 @@ class Header extends React.Component {
 							<div className="col-lg-5 col-md-6">
 								<h1 className="text-white">Welcome!</h1>
 								<p className="text-lead text-light">
-									Sign up or Login to easily add chatbox to the your website.
+									Sign up or login to easily add a chat room to the your website.
 								</p>
 							</div>
 						</div>

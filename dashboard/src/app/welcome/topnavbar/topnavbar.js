@@ -7,7 +7,7 @@ class Topnavbar extends React.Component {
 			<nav className="navbar navbar-top navbar-horizontal navbar-expand-md navbar-light">
 				<div className="container px-4">
 					<a className="navbar-brand" href="/">
-						<img alt="Logo" src={process.env.PUBLIC_URL + "/assets/img/white.png"} />
+						<img alt="Logo" src={process.env.PUBLIC_URL + "/assets/img/header-logo-white.png"} />
 					</a>
 					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span className="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@ class Topnavbar extends React.Component {
 					<div className="navbar-collapse-header d-md-none">
 						<div className="row">
 						<div className="col-6 collapse-brand">
-							<img src={process.env.PUBLIC_URL + "/assets/img/blue.png"}/>
+							<img src={process.env.PUBLIC_URL + "/assets/img/header-logo.png"}/>
 						</div>
 						<div className="col-6 collapse-close">
 							<button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">

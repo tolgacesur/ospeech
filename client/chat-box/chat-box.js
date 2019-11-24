@@ -20,7 +20,7 @@ function ChatBox() {
 	}
 
 	this.createSocket = function() {
-		var socket = io(process.env.WS_URL, {
+		var socket = io(process.env.API_URL, {
 			reconnectionDelay: 250,
 			reconnectionAttempts: 3
 		});

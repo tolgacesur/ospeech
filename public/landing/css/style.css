@@ -2020,3 +2020,27 @@ html{scroll-behavior:smooth}
   border: 1px solid;
   text-transform: uppercase;
 }
+
+#header {
+  background-color : #f8f8f8;
+  z-index : 2;
+  padding-bottom : 8px;
+  display: none;
+}
+
+
+#alert-success {
+  display: none;
+}
+
+#alert-error-fill-all {
+  display: none;
+}
+
+#alert-error-invalid-email {
+  display: none;
+}
+
+#alert-error-occured {
+  display: none;
+}

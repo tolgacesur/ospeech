@@ -37,11 +37,9 @@ $('.main-navigation').meanmenu({
 });
 
 var header = document.getElementById("header");
-var sticky = header.offsetTop;
-header.style.backgroundColor = '#f8f8f8';
-header.style.zIndex = 2;
-header.style.paddingBottom = '8px';
+header.style.display = 'block';
 
+var sticky = header.offsetTop;
 window.onscroll = function() {
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");

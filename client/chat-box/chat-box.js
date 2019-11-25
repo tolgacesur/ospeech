@@ -22,7 +22,8 @@ function ChatBox() {
 	this.createSocket = function() {
 		var socket = io(process.env.API_URL, {
 			reconnectionDelay: 250,
-			reconnectionAttempts: 3
+			reconnectionAttempts: 3,
+			transports: ['polling']
 		});
 
 		socket.on('connect', this.joinRoom.bind(this));

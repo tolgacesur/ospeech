@@ -14,5 +14,13 @@ router.get("/", (req,res) => {
     })
 })
 
-
+//  Get last ten messages
+router.post("/lastmessages",(req,res) => {
+    Message.find({"roomId":req.body.key},(err, message) => {
+            if(err)
+                return res.send(err);
+            return res.send(message.reverse())
+        }).sort({createdAt:-1}).limit(10);
+  
+})
 module.exports = router

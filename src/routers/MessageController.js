@@ -18,8 +18,8 @@ router.get("/", (req,res) => {
 router.post("/lastmessages",(req,res) => {
     Message.find({"roomId":req.body.key},(err, message) => {
             if(err)
-                return res.send(err);
-            return res.send(message.reverse())
+               return console.log(err)
+            return res.status(200).send(message.reverse())
         }).sort({createdAt:-1}).limit(10);
   
 })

@@ -23,7 +23,7 @@ function ChatBox() {
 		var socket = io(process.env.API_URL, {
 			reconnectionDelay: 250,
 			reconnectionAttempts: 3,
-			transports: ['polling']
+			transports: [process.env === 'production' ? 'polling' : 'websocket']
 		});
 
 		socket.on('connect', this.joinRoom.bind(this));

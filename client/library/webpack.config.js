@@ -12,7 +12,7 @@ module.exports = (env) => ({
 	},
 	plugins : [
 		new Dotenv({
-			path: `./.env.${env.production ? "prod" : "dev"}`,
+			path: `./.env.${process.env.production ? "prod" : "dev"}`,
 		})
 	],
 	module: {}

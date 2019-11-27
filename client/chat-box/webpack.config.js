@@ -23,7 +23,7 @@ module.exports = (env) => ({
 			ignoreOrder: false, // Enable to remove warnings about conflicting order
 		}),
 		new Dotenv({
-			path: `./.env.${env.production ? "prod" : "dev"}`,
+			path: `./.env.${process.env.production ? "prod" : "dev"}`,
 		})
 	],
 	module: {

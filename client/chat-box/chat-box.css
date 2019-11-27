@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-	background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+	background: linear-gradient(120deg, rgb(18, 144, 164) 0%, rgb(18, 144, 164) 0%, rgb(245, 104, 118) 100%);
 }
 
 #messages {
@@ -52,18 +52,24 @@ textarea {
 	background-color: #efefef;
 	border-radius: 5px;
 	padding: 5px;
-	margin: 5px 0;
+	margin: 7px 0;
 	width: 60%;
+	max-width: 300px;
+	box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.15);
 }
 
-.right .message-container {
-	float: right;
+.right {
+	flex-direction: row-reverse;
+	display: flex;
+	text-align: left;
+	float: none;
 }
 
-.left .message-container {
-	float: left;
+.left {
+	display: flex;
+    text-align: left;
+    float: none;
 }
-
 
 /* Scrollbar style */
 ::-webkit-scrollbar {

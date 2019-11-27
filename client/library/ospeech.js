@@ -55,7 +55,7 @@ export default function OSpeech(config) {
 		// Create toggle button
 		this.toggleButton = document.createElement('button');
 		this.toggleButton.style.cssText =`
-			background-color: #080e7c;
+			background-color: #558597;
 			border: none;
 			padding: 15px 32px;
 			text-align: center;
@@ -64,6 +64,7 @@ export default function OSpeech(config) {
 			border-radius: 5px 5px 0px 0px;
 			outline: none;
 			cursor: pointer;
+			justify-content: center;
 			align-items: center;`
 		this.toggleButton.style.position = "fixed";
 		this.toggleButton.style.top = this.chatBox.offsetHeight / 2 + 'px';
@@ -75,21 +76,11 @@ export default function OSpeech(config) {
 		this.toggleButton.onclick = this.toggle.bind(this);
 
 		var imgElement = document.createElement('img');
-		imgElement.width = '25';
+		imgElement.width = '90';
 		imgElement.height = '25';
-		imgElement.src = '../client/library/assets/svg/planet-earth.svg';
+		imgElement.src = '../client/library/assets/img/logo.png';
 		imgElement.style.marginRight = '5px';
 		this.toggleButton.appendChild(imgElement);
-
-		var textElement = document.createElement('span');
-		textElement.textContent = 'Ospeech'
-		textElement.style.cssText = `
-			color: #ffff;
-			line-height: normal;
-			font-family : arial;
-			font-weigth : 400;
-			font-size: 16px;`;
-		this.toggleButton.appendChild(textElement);
 
 		container.appendChild(this.toggleButton);
 
@@ -158,7 +149,7 @@ export default function OSpeech(config) {
 
 			// Width of widget should be lesser than device width
 			var deviceWith = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-			if (config.width > deviceWith){
+			if (config.width > deviceWith * 0.8){
 				config.width = deviceWith;
 			}
 		

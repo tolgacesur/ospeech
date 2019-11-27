@@ -61,11 +61,12 @@ function ChatBox() {
 			messageElement.className += 'left';
 		}
 		
+		var isScrollAtBottom = this.isScrollAtBottom();
+
 		var allMessages = document.querySelector("#messages");
 		allMessages.appendChild(messageElement);
 
-
-		if (data.username === this.username) {
+		if (data.username === this.username || isScrollAtBottom) {
 			// Scroll to bottom
 			var messagesElem = document.getElementById("messages");
 			messagesElem.scrollTop = messagesElem.scrollHeight;
@@ -73,6 +74,10 @@ function ChatBox() {
 	}
 
 	this.sendMessage = function(message) {
+		if (!message || !message.length){
+			return;
+		}
+
 		this.socket.emit('send-message', {username: this.username, message, roomId: this.options.appKey});
 	}
 
@@ -99,23 +104,40 @@ function ChatBox() {
 				return;
 			}
 
-			self.sendMessage(messageInputElement.value);
+			self.sendMessage(messageInputElement.value.trim());
 			messageInputElement.value = '';
 			messageInputElement.focus();
-		}
 
-		messageInputElement.addEventListener("keyup", function(event) {
 			// Reset input size
 			if (!messageInputElement.value.length){
 				messageInputElement.style.height = 0;
 				return;
 			}
+		}
+
+		messageInputElement.addEventListener("keyup", function(event) {
+			if (!messageInputElement.value.length){
+				return;
+			}
 
 			// Number 13 is the "Enter" key on the keyboard
 			if (event.keyCode === 13) {
-				self.sendMessage(messageInputElement.value);
+				self.sendMessage(messageInputElement.value.trim());
 				messageInputElement.value = '';
 				messageInputElement.focus();
+			}
+
+			// Reset input size
+			if (!messageInputElement.value.length){
+				messageInputElement.style.height = 0;
+				return;
+			}
+		});
+
+		messageInputElement.addEventListener('keydown', function(event){
+			if (event.keyCode === 13) {
+				event.stopPropagation();
+				event.preventDefault();
 			}
 		});
 
@@ -285,6 +307,11 @@ function ChatBox() {
 		}
 
 		return moment(date).format('MMMM DD, HH:mm');
+	}
+
+	this.isScrollAtBottom = function() {
+		var messagesElement = document.getElementById('messages');
+		return messagesElement.scrollTop === (messagesElement.scrollHeight - messagesElement.offsetHeight);
 	}
 }
 

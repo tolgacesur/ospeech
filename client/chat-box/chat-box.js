@@ -13,6 +13,7 @@ function ChatBox() {
 		this.options = this.getOptions(); // appKey
 		this.socket = this.createSocket();
 
+		this.getOldMessages();
 		this.addChatBoxListeners();
 
 		this.setFormVisibiliy();
@@ -73,6 +74,21 @@ function ChatBox() {
 
 	this.sendMessage = function(message) {
 		this.socket.emit('send-message', {username: this.username, message, roomId: this.options.appKey});
+	}
+
+	this.getOldMessages = function () {
+		var self = this;
+		$.ajax(process.env.API_URL + '/message/lastmsg', {
+			data : JSON.stringify({
+				key: self.options.appKey
+			}),
+			type : 'POST',
+			contentType : 'application/json',
+		}).done(function(response){
+			for (let msg of response) {
+				self.messageReceived(msg);
+			}
+		})
 	}
 
 	this.addChatBoxListeners = function() {

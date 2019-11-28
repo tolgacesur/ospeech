@@ -27,7 +27,7 @@ const welcome = require('./src/routers/WelcomeController')
 app.use('/user',user)
 app.use('/api', auth.verifyUser, api)
 app.use('/feedbacks',feedbacks)
-app.use('/message', auth.verifyUser, message)
+app.use('/message', message)
 app.use('/', auth.checkCookie, welcome)
 
 // Public Files

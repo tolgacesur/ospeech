@@ -23,6 +23,7 @@ function App() {
 			<Route path="/login" component={Welcome}/>
 			<Route path="/register" component={Welcome}/>
 			<Route path="/main" component={Dashboard}/>
+			<Route path="/room" component={Dashboard}/>
 		</Router>
 	);
 }

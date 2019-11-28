@@ -1,3 +1,21 @@
 body {
 	background-color: #eef4f5 ;
 }
+
+/* Scrollbar style */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #999;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #aaa;
+}

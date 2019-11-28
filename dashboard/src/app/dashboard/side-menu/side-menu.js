@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import ApiService from '../../service/api';
+import './side-menu.scss';
 
 class Sidemenu extends React.Component {
 
@@ -59,7 +60,12 @@ class Sidemenu extends React.Component {
 						<ul className="navbar-nav">
 							<li className="nav-item">
 								<NavLink exact className="nav-link" activeClassName="active" to="/main">
-									<i className="ni ni-tv-2 text-primary"></i> Dashboard
+									<i className="ni ni-tv-2 text-primary"></i> Get Started
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink exact className="nav-link" activeClassName="active" to="/room">
+									<i className="ni ni-tv-2 text-primary"></i> Room
 								</NavLink>
 							</li>
 						</ul>

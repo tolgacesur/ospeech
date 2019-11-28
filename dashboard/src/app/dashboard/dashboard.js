@@ -5,6 +5,7 @@ import SideMenu from './side-menu/side-menu';
 import Main from './main/main';
 import Topnavbar from './topnavbar/topnavbar';
 import Footer from './footer/footer';
+import ChatRoom from './room/room';
 
 import ApiService from '../service/api';
 import Cache from '../service/cache';
@@ -46,6 +47,9 @@ class Dashboard extends React.Component {
 					<div className="container-fluid mt--7">
 						<Route exact path="/main">
 							<Main />
+						</Route>
+						<Route path="/room">
+							<ChatRoom/>
 						</Route>
 						<Footer/>
 					</div>

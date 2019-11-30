@@ -85,9 +85,7 @@ function ChatBox() {
 			type : 'POST',
 			contentType : 'application/json',
 		}).done(function(response){
-			for (let msg of response) {
-				self.messageReceived(msg);
-			}
+			response.forEach(element => self.messageReceived(element));
 		})
 	}
 

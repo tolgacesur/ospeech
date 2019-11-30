@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://ospeech.org/sitemap/0.9">
+
+   <url>
+
+      <loc>http://ospeech.org/</loc>
+
+      <lastmod>2019-11-25</lastmod>
+
+      <changefreq>monthly</changefreq>
+
+      <priority>0.8</priority>
+
+   </url>
+
+   <url>
+
+      <loc>http://ospeech.org/#features</loc>
+
+      <changefreq>weekly</changefreq>
+
+   </url>
+
+   <url>
+
+      <loc>http://ospeech.org/#services</loc>
+
+      <changefreq>weekly</changefreq>
+
+   </url>
+
+   <url>
+
+      <loc>http://ospeech.org/#contact</loc>
+
+       <changefreq>monthly</changefreq>
+
+   </url>
+
+   <url>
+
+      <loc>http://ospeech.org/login</loc>
+
+    <changefreq>monthly</changefreq>
+
+   </url>
+
+    <url>
+
+      <loc>http://ospeech.org/register</loc>
+
+    <changefreq>monthly</changefreq>
+
+   </url>
+
+</urlset>

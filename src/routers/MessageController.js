@@ -16,7 +16,6 @@ router.post("/history", (req,res) => {
 
 //  Get last ten messages
 router.post("/lastmsg",(req,res) => {
-    console.log(req.body)
     Message.find({"roomId":req.body.key},(err, message) => {
             if(err)
                return console.log(err)

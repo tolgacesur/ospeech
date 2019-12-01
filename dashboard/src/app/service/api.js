@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cache from './cache';
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -49,72 +50,11 @@ export default class ApiService {
 	}
 
 	static getAllMessages() {
-		return Promise.resolve([
-			{
-				_id : '1',
-				username : 'tolga',
-				message : 'test1',
-				createdAt : new Date()
-			},
-			{
-				_id : '2',
-				username : 'tolga',
-				message : 'test2',
-				createdAt : new Date()
-			},
-			{
-				_id : '3',
-				username : 'tolga',
-				message : 'test3',
-				createdAt : new Date()
-			},
-			{
-				_id : '4',
-				username : 'tolga',
-				message : 'test4',
-				createdAt : new Date()
-			},
-			{
-				_id : '5',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			},
-			{
-				_id : '6',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			},
-			{
-				_id : '7',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			},
-			{
-				_id : '8',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			},
-			{
-				_id : '10',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			},
-			{
-				_id : '11',
-				username : 'tolga',
-				message : 'test5',
-				createdAt : new Date()
-			}
-		])
+		return axios.post(`/message/history`, {key : Cache.room.key});
 	}
 
 	static deleteAllMessages() {
-		return Promise.resolve();
+		return axios.post(`/message/clearhistory`, {key : Cache.room.key});
 	}
 
 	static logout(){

@@ -6,8 +6,8 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get("/",auth.verifyUser, (req,res) => {
-    Message.find({}, (err, messages) => {
+router.post("/history", (req,res) => {
+    Message.find({ $and:[ {deletedAt:null},{ roomId:req.body.key} ] }, (err, messages) => {
         if(err)
             return res.status(500).send({"message":err})
         res.status(200).send(messages)
@@ -24,4 +24,14 @@ router.post("/lastmsg",(req,res) => {
         }).sort({createdAt:-1}).limit(10);
   
 })
+
+router.post("/clearhistory", (req,res) => {
+    let dateNow = new Date(Date.now()).toISOString(); 
+    Message.updateMany( { $and:[ {deletedAt:null},{ roomId:req.body.key} ] }, {"$set":{"deletedAt": dateNow}}, (err,update) => {
+        if(err) 
+            return res.status(402).send({"messages":err})
+        res.status(200).send("succes")
+    })
+})
+
 module.exports = router

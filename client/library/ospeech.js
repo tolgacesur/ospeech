@@ -21,7 +21,7 @@ export default function OSpeech(config) {
 		Object.assign(this, config);
 
 		var container = document.createElement('div');
-		container.style.zIndex = 1000;
+		container.style.zIndex = 9999;
 		document.body.appendChild(container);
 
 		// Create chat box
@@ -96,7 +96,7 @@ export default function OSpeech(config) {
 			text-decoration: none;
 			cursor: pointer;
 			top: 10px;
-			z-index: 1000;
+			z-index: 9999;
 			font-size: 16px;`
 		this.mobileToggleButton.style.position = 'fixed';
 		this.mobileToggleButton.style.transition = '.2s';

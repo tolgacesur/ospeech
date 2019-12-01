@@ -50,7 +50,7 @@ function ChatBox() {
 		`<div class="message-container">
 			<div class="d-flex">
 				<strong class="flex-grow-1">${data.username}</strong>
-				<small>${this.formatDate(new Date())}</small>
+				<small>${this.formatDate(data.createdAt ? new Date(data.createdAt) : new Date())}</small>
 			</div>
 			<p class="mb-1">${data.message}</p>
 		</div>`;

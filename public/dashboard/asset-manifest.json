@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "./dashboard/static/css/main.341da2e4.chunk.css",
-    "main.js": "./dashboard/static/js/main.3a2891af.chunk.js",
+    "main.css": "./dashboard/static/css/main.b7131866.chunk.css",
+    "main.js": "./dashboard/static/js/main.e60e1981.chunk.js",
     "runtime-main.js": "./dashboard/static/js/runtime-main.bd997a39.js",
     "static/js/2.0a78159c.chunk.js": "./dashboard/static/js/2.0a78159c.chunk.js",
     "index.html": "./dashboard/index.html",
-    "precache-manifest.a314391eaa4e19f787da9aab370e6224.js": "./dashboard/precache-manifest.a314391eaa4e19f787da9aab370e6224.js",
+    "precache-manifest.248ad67aa9a3c006a1eb9ed2405d1e8d.js": "./dashboard/precache-manifest.248ad67aa9a3c006a1eb9ed2405d1e8d.js",
     "service-worker.js": "./dashboard/service-worker.js"
   },
   "entrypoints": [
     "static/js/runtime-main.bd997a39.js",
     "static/js/2.0a78159c.chunk.js",
-    "static/css/main.341da2e4.chunk.css",
-    "static/js/main.3a2891af.chunk.js"
+    "static/css/main.b7131866.chunk.css",
+    "static/js/main.e60e1981.chunk.js"
   ]
 }

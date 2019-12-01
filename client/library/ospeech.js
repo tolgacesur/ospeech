@@ -35,7 +35,7 @@ export default function OSpeech(config) {
 		this.chatBox.style.right = "0px";
 		this.chatBox.style.width = "0px";
 		this.chatBox.width = this.width + 'px';
-		this.chatBox.style.zIndex = 1000;
+		this.chatBox.style.zIndex = 9999;
 		this.chatBox.frameBorder = "0";
 		this.chatBox.style.transition = '.2s';
 		this.chatBox.style.webkitTransition = '.2s';

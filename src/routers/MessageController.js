@@ -14,13 +14,13 @@ router.post("/history", (req,res) => {
     })
 })
 
-//  Get last ten messages
+//  Get last 20 messages
 router.post("/lastmsg",(req,res) => {
     Message.find({"roomId":req.body.key},(err, message) => {
             if(err)
                return console.log(err)
             return res.status(200).send(message.reverse())
-        }).sort({createdAt:-1}).limit(10);
+        }).sort({createdAt:-1}).limit(20);
   
 })
 

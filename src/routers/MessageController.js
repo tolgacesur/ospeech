@@ -6,7 +6,7 @@ router.use((req, res, next) => {
     next()
 })
 
-router.post("/history", (req,res) => {
+router.post("/history", auth.verifyUser, (req,res) => {
     Message.find({ $and:[ {deletedAt:null},{ roomId:req.body.key} ] }, (err, messages) => {
         if(err)
             return res.status(500).send({"message":err})
@@ -16,7 +16,7 @@ router.post("/history", (req,res) => {
 
 //  Get last 20 messages
 router.post("/lastmsg",(req,res) => {
-    Message.find({"roomId":req.body.key},(err, message) => {
+    Message.find({ $and:[ {deletedAt:null},{ roomId:req.body.key} ] },(err, message) => {
             if(err)
                return console.log(err)
             return res.status(200).send(message.reverse())
@@ -24,7 +24,7 @@ router.post("/lastmsg",(req,res) => {
   
 })
 
-router.post("/clearhistory", (req,res) => {
+router.post("/clearhistory", auth.verifyUser, (req,res) => {
     let dateNow = new Date(Date.now()).toISOString(); 
     Message.updateMany( { $and:[ {deletedAt:null},{ roomId:req.body.key} ] }, {"$set":{"deletedAt": dateNow}}, (err,update) => {
         if(err) 
